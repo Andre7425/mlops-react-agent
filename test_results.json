@@ -1,0 +1,135 @@
+[
+  {
+    "test_id": "TC-001",
+    "complexity": "simple",
+    "query": "Перевір, чи поміститься навчання yolo11n у fp16 з batch_size=16 та img_size=640 на відеокарті з 6 GB VRAM.",
+    "expected": "Виклик estimate_gpu_vram(yolo11n, train, fp16, batch_size=16, img_size=640, gpu_vram_gb=6.0); підтвердження статусу SAFE і точна оцінка VRAM (~1.7 ГБ).",
+    "expected_tools": [
+      "estimate_gpu_vram"
+    ],
+    "actual": "Навчання моделі yolo11n у режимі fp16 з batch_size=16 та img_size=640 успішно поміститься на відеокарті з 6 GB VRAM. Загальне споживання пам'яті становить 1.68 ГБ, що становить лише 28.0% від доступного обсягу, залишаючи 4.32 ГБ вільної пам'яті. Розподіл використання VRAM: активації — 0.988 ГБ, CUDA overhead — 0.65 ГБ, оптимізатор та градієнти — 0.039 ГБ, ваги моделі — 0.005 ГБ. Статус навчання визначено як SAFE, що дозволяє розглянути можливість збільшення розміру батчу для підвищення ефективності.",
+    "confidence": 1.0,
+    "sources": [
+      "estimate_gpu_vram"
+    ],
+    "status": "success",
+    "steps": 2,
+    "tool_calls": [
+      "estimate_gpu_vram"
+    ],
+    "elapsed_ms": 10713,
+    "stop_reason": null,
+    "hit_max_steps": false,
+    "hit_timeout": false,
+    "hit_loop_detector": false
+  },
+  {
+    "test_id": "TC-002",
+    "complexity": "medium",
+    "query": "Порівняй споживання VRAM для навчання yolo11m (batch_size=8, img_size=640, GPU 6 GB) у точності fp32 проти fp16 та скажи, який варіант безпечний.",
+    "expected": "Два виклики estimate_gpu_vram (для fp32 і fp16); порівняння точних ГБ VRAM та висновок, що fp16 безпечний, а fp32 має високий ризик OOM.",
+    "expected_tools": [
+      "estimate_gpu_vram"
+    ],
+    "actual": "Для навчання моделі yolo11m (batch_size=8, img_size=640) на GPU з 6 ГБ отримано такі результати порівняння точності: 1. Режим FP32: загальне споживання складає 4.31 ГБ (утилізація 71.8%), статус SAFE. Найбільшу частину займають активації — 3.359 ГБ, залишаючи 1.69 ГБ вільної пам'яті. 2. Режим FP16: загальне споживання складає 2.83 ГБ (утилізація 47.2%), статус SAFE. Тут активації займають лише 1.848 ГБ, що залишає 3.17 ГБ вільного простору. Обидва варіанти є безпечними для вашого обладнання, проте режим FP16 є значно вигіднішим, оскільки він споживає на 1.48 ГБ менше відеопам'яті та забезпечує більший запас стабільності для запобігання помилкам Out of Memory (OOM).",
+    "confidence": 1.0,
+    "sources": [
+      "estimate_gpu_vram"
+    ],
+    "status": "success",
+    "steps": 2,
+    "tool_calls": [
+      "estimate_gpu_vram",
+      "estimate_gpu_vram"
+    ],
+    "elapsed_ms": 12605,
+    "stop_reason": null,
+    "hit_max_steps": false,
+    "hit_timeout": false,
+    "hit_loop_detector": false
+  },
+  {
+    "test_id": "TC-003",
+    "complexity": "medium",
+    "query": "Хочу тренувати yolo11l у 1024x1024 на RTX 2060 (6 GB VRAM) з ефективним батчем 16. Спочатку оціни VRAM для batch_size=8 у fp16, а потім підбери безпечну конфігурацію.",
+    "expected": "Виклик estimate_gpu_vram (OOM_EXCEEDED > 6 GB) + recommend_training_config (micro_batch_size=4, gradient_accumulation_steps=4, fp16, ~4.26 GB).",
+    "expected_tools": [
+      "estimate_gpu_vram",
+      "recommend_training_config"
+    ],
+    "actual": "Аналіз можливості тренування YOLO11l (1024x1024) на RTX 2060 (6 GB VRAM) показав наступні результати:\n\n1. Оцінка початкового запиту (batch_size=8, fp16):\nСпроба запуску з такими параметрами призведе до помилки Out of Memory (OOM). Загальна потреба у відеопам'яті становить 7.45 ГБ, що складає 124.2% від доступних 6.0 ГБ. Основний об'єм пам'яті займають активації (6.38 ГБ), тоді як ваги та градієнти потребують лише 0.047 ГБ та 0.377 ГБ відповідно.\n\n2. Рекомендована безпечна конфігурація (ефективний батч 16):\nДля досягнення цільового ефективного батчу 16 без ризику вильоту системи, рекомендується використовувати наступні налаштування:\n- Режим точності: fp16\n- Micro-batch size: 4\n- Gradient Accumulation Steps: 4 (разом дають ефективний батч 16)\n- Очікуване споживання VRAM: 4.26 ГБ (71.1% від ліміту)\n- Додаткові параметри: num_workers=4, pin_memory=true\n\nЦя конфігурація залишає запас у 1.74 ГБ, що необхідно для стабільної роботи CUDA overhead та уникнення OOM-спайків під час етапів валідаці",
+    "confidence": 1.0,
+    "sources": [
+      "estimate_gpu_vram",
+      "recommend_training_config"
+    ],
+    "status": "success",
+    "steps": 2,
+    "tool_calls": [
+      "estimate_gpu_vram",
+      "recommend_training_config"
+    ],
+    "elapsed_ms": 26063,
+    "stop_reason": null,
+    "hit_max_steps": false,
+    "hit_timeout": false,
+    "hit_loop_detector": false
+  },
+  {
+    "test_id": "TC-004",
+    "complexity": "complex",
+    "query": "Проведи строгий QA-аудит партії DRONE-07: 4000 зображень, перевірено 450, mean_iou=0.72, honeypot_accuracy=0.84, missing_label_rate=0.06. Якщо партію відхилять, обов'язково розрахуй через інструмент бюджет повної перерозмітки для bbox (середньо 8 об'єктів/кадр, ставка $11/год, 15% QA) у двох варіантах: без pre-labeling та з pre-labeling.",
+    "expected": "audit_annotation_batch -> REJECTED (4000 кадрів на rework); два виклики estimate_labeling_budget (~$758.97 без pre-labeling vs ~$326.30 з pre-labeling).",
+    "expected_tools": [
+      "audit_annotation_batch",
+      "estimate_labeling_budget"
+    ],
+    "actual": "Результати строгого QA-аудиту партії DRONE-07 (4000 зображень): статус — ВІДХИЛЕНО (REJECTED). Покриття перевіркою склало 11.25% (450 кадрів), зафіксовано 100% потребу у перерозмітці через критичне відхилення від нормативів: 1. Середній IoU склав 0.72 (мінімум 0.85). 2. Точність honeypot — 0.84 (мінімум 0.92). 3. Частка пропущених міток — 6.00% (максимум 2.00%). Розрахунок бюджету повної перерозмітки (8 об'єктів/кадр, $11/год, 15% QA): Варіант без pre-labeling: загальна вартість $758.97, час виконання — 69 годин (11.5 людино-днів). Варіант із pre-labeling: загальна вартість $326.3, час виконання — 29.66 годин (4.94 людино-днів). Використання pre-labeling дозволяє скоротити витрати на $432.67 (57%) та пришвидшити процес більш ніж удвічі.",
+    "confidence": 1.0,
+    "sources": [
+      "audit_annotation_batch",
+      "estimate_labeling_budget"
+    ],
+    "status": "success",
+    "steps": 3,
+    "tool_calls": [
+      "audit_annotation_batch",
+      "estimate_labeling_budget",
+      "estimate_labeling_budget"
+    ],
+    "elapsed_ms": 21670,
+    "stop_reason": null,
+    "hit_max_steps": false,
+    "hit_timeout": false,
+    "hit_loop_detector": false
+  },
+  {
+    "test_id": "TC-005",
+    "complexity": "complex",
+    "query": "Планую навчати efficientnet_b4 (img_size=640) на GPU з 8 GB VRAM. Перевір, чи можна запустити навчання в int4 з batch_size=16; якщо ні — підбери безпечну конфігурацію для ефективного batch_size=32 (без bf16) і додатково порахуй бюджет розмітки датасету на 3000 зображень типу classification (ставка $9/год, 10% QA).",
+    "expected": "Коректна обробка заборони int4 у train (через валідацію або правило), підбір конфігу через recommend_training_config + розрахунок бюджету через estimate_labeling_budget.",
+    "expected_tools": [
+      "recommend_training_config",
+      "estimate_labeling_budget"
+    ],
+    "actual": "Ось детальний технічний розбір вашого запиту:\n\n### 1. Перевірка VRAM для EfficientNet-B4\n**Важливе зауваження:** Точність `int4` використовується виключно для інференсу (запуску готової моделі). Для навчання мінімально допустимим стандартом є `fp16` (Mixed Precision), тому розрахунок проведено саме для цього режиму.\n\n*   **Модель:** EfficientNet-B4\n*   **Конфігурація:** Batch Size 16, Image Size 640, Precision FP16.\n*   **Результат:** **Пройдено (SAFE)**.\n*   **Використання VRAM:** ~5.18 ГБ з 8 ГБ доступних (завантаження 64.8%).\n*   **Вердикт:** Навчання з batch_size=16 у FP16 працюватиме стабільно.\n\n### 2. Рекомендована конфігурація для Effective Batch Size 32\nОскільки ви хочете досягти ефективного розміру батчу 32 без використання `bf16` (наприклад, на картах архітектури Turing, як RTX 20-серія), рекомендується використовувати Gradient Accumulation:\n\n*   **Micro Batch Size:** 16 (максимально безпечний для 8 ГБ).\n*   **Gradient Accumulation Steps:** 2 (16 * 2 = 32).\n*   **Точність:** ",
+    "confidence": 0.85,
+    "sources": [
+      "estimate_gpu_vram",
+      "recommend_training_config",
+      "estimate_labeling_budget"
+    ],
+    "status": "success",
+    "steps": 2,
+    "tool_calls": [
+      "estimate_gpu_vram",
+      "recommend_training_config",
+      "estimate_labeling_budget"
+    ],
+    "elapsed_ms": 105939,
+    "stop_reason": null,
+    "hit_max_steps": false,
+    "hit_timeout": false,
+    "hit_loop_detector": false
+  }
+]
