@@ -62,11 +62,11 @@ python test_runner.py
 
 | Test ID | Складність | Кроків | Tool calls | Час, мс | Статус |
 |---------|------------|--------|------------|---------|--------|
-| TC-001 | simple | 2 | `estimate_gpu_vram` x 1 | 10713 | ✅ success |
-| TC-002 | medium | 2 | `estimate_gpu_vram` x 2 | 12605 | ✅ success |
-| TC-003 | medium | 2 | `estimate_gpu_vram` x 1, `recommend_training_config` x 1 | 26063* | ✅ success |
-| TC-004 | complex | 3 | `audit_annotation_batch` x 1, `estimate_labeling_budget` x 2 | 21670 | ✅ success |
-| TC-005 | complex | 2 | `estimate_gpu_vram` x 1, `recommend_training_config` x 1, `estimate_labeling_budget` x 1 | 105939* | ✅ success |
+| TC-001 | simple | 2 | `estimate_gpu_vram` x 1 | 4870 | ✅ success |
+| TC-002 | medium | 2 | `estimate_gpu_vram` x 2 | 5636 | ✅ success |
+| TC-003 | medium | 2 | `estimate_gpu_vram` x 1, `recommend_training_config` x 1 | 5191 | ✅ success |
+| TC-004 | complex | 4 | `audit_annotation_batch` x 1, `estimate_labeling_budget` x 2 | 24013 | ✅ success |
+| TC-005 | complex | 2 | `estimate_gpu_vram` x 1, `recommend_training_config` x 1, `estimate_labeling_budget` x 1 | 5210 | ✅ success |
 
 *Примітка: у `TC-003` час включає 13 с паузи очікування після HTTP 429 (~13 с чистого виконання); у `TC-005` час включає 90 с (15 + 30 + 45 с) backoff-спроб у вузлі `formatter` через Free Tier RPM, після чого спрацював безпечний fallback (~15 с чистого виконання).*
 

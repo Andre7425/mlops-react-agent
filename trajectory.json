@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-25T19:28:44.382744+00:00",
-  "model": "gemini-3-flash-preview",
+  "generated_at": "2026-11-25T20:55:27.148445+00:00",
+  "model": "gemini-3.1-flash-lite",
   "safety_config": {
     "max_steps": 10,
     "timeout_seconds": 120.0,
     "max_repeats": 3
   },
   "total_tests": 5,
-  "total_steps": 22,
-  "total_time_ms": 225062,
+  "total_steps": 24,
+  "total_time_ms": 92989,
   "trajectory": [
     {
       "test_id": "TC-001",
@@ -19,46 +19,46 @@
       "tool_calls": [
         "estimate_gpu_vram"
       ],
-      "timestamp": "2026-11-25T19:25:01.262034+00:00",
-      "duration_ms": 1923,
-      "elapsed_ms": 1941
+      "timestamp": "2026-11-25T20:53:55.519695+00:00",
+      "duration_ms": 1340,
+      "elapsed_ms": 1360
     },
     {
       "test_id": "TC-001",
       "step_number": 2,
       "node_name": "tools",
-      "input": "[{\"name\": \"estimate_gpu_vram\", \"args\": {\"precision\": \"fp16\", \"mode\": \"train\", \"model_name\": \"yolo11n\", \"gpu_vram_gb\": 6, \"batch_size\": 16, \"img_size\": 640}}]",
+      "input": "[{\"name\": \"estimate_gpu_vram\", \"args\": {\"gpu_vram_gb\": 6, \"model_name\": \"yolo11n\", \"mode\": \"train\", \"img_size\": 640, \"batch_size\": 16, \"precision\": \"fp16\"}}]",
       "output": "estimate_gpu_vram: {\"model_name\": \"yolo11n\", \"mode\": \"train\", \"precision\": \"fp16\", \"batch_size\": 16, \"img_size\": 640, \"gpu_vram_gb\": 6.0, \"breakdown_gb\": {\"weights_gb\": 0.005, \"optimizer_and_grad_gb\": 0.039, \"activations_gb\": 0.988, \"cuda_overhead_gb\": 0.65}, \"total_vram_gb\": 1.68, \"free_vram_gb\": 4.32, \"utilization_pct\": 28.0, \"fits_in_gpu\": true, \"status\": \"SAFE\"}",
       "tool_calls": [
         "estimate_gpu_vram"
       ],
-      "timestamp": "2026-11-25T19:25:01.264750+00:00",
-      "duration_ms": 1,
-      "elapsed_ms": 1944
+      "timestamp": "2026-11-25T20:53:55.522588+00:00",
+      "duration_ms": 2,
+      "elapsed_ms": 1363
     },
     {
       "test_id": "TC-001",
       "step_number": 3,
       "node_name": "agent",
       "input": "{\"model_name\": \"yolo11n\", \"mode\": \"train\", \"precision\": \"fp16\", \"batch_size\": 16, \"img_size\": 640, \"gpu_vram_gb\": 6.0, \"breakdown_gb\": {\"weights_gb\": 0.005, \"optimizer_and_grad_gb\": 0.039, \"activations_gb\": 0.988, \"cuda_overhead_gb\": 0.65}, \"total_vram_gb\": 1.68, \"free_vram_gb\": 4.32, \"utilization_pct\": 28.0, \"fits_in_gpu\": true, \"status\": \"SAFE\"}",
-      "output": "Навчання моделі **yolo11n** із заданими параметрами успішно поміститься у відеопам'ять об'ємом 6 ГБ.\n\nОсь детальний розрахунок:\n- **Загальне споживання VRAM:** ~1.68 ГБ.\n- **Завантаження відеопам'яті:** 28%.\n- **Вільна пам'ять:** 4.32 ГБ.\n\n**Розподіл пам'яті:**\n*   **Ваги моделі:** 0.005 ГБ.\n*   **Оптимізатор та градієнти:** 0.039 ГБ.\n*   **Активації (найбільша частина):** 0.988 ГБ.\n*   **CUDA Overhead:** 0.65 ГБ.\n\n**Вердикт:** Статус **SAFE**. У вас є значний запас пам'яті, що дозволяє за необх...",
+      "output": "Так, навчання моделі **yolo11n** з вказаними параметрами (batch_size=16, img_size=640, fp16) успішно поміститься у 6 GB відеопам'яті.\n\n**Деталі розрахунку:**\n*   **Загальне споживання VRAM:** ~1.68 GB.\n*   **Рівень завантаження GPU:** 28%.\n*   **Статус:** **SAFE** (безпечно).\n*   **Розподіл пам'яті:**\n    *   Активації: 0.988 GB\n    *   CUDA overhead: 0.65 GB\n    *   Ваги та оптимізатор: ~0.044 GB\n\nУ вас залишається близько 4.32 GB вільної пам'яті, тому ви можете навіть збільшити розмір батчу (b...",
       "tool_calls": [],
-      "timestamp": "2026-11-25T19:25:03.388371+00:00",
-      "duration_ms": 2123,
-      "elapsed_ms": 4068
+      "timestamp": "2026-11-25T20:53:57.744611+00:00",
+      "duration_ms": 2221,
+      "elapsed_ms": 3585
     },
     {
       "test_id": "TC-001",
       "step_number": 4,
       "node_name": "formatter",
-      "input": "Навчання моделі **yolo11n** із заданими параметрами успішно поміститься у відеопам'ять об'ємом 6 ГБ.\n\nОсь детальний розрахунок:\n- **Загальне споживання VRAM:** ~1.68 ГБ.\n- **Завантаження відеопам'яті:** 28%.\n- **Вільна пам'ять:** 4.32 ГБ.\n\n**Розподіл пам'яті:**\n*   **Ваги моделі:** 0.005 ГБ.\n*   **Оптимізатор та градієнти:** 0.039 ГБ.\n*   **Активації (найбільша частина):** 0.988 ГБ.\n*   **CUDA Overhead:** 0.65 ГБ.\n\n**Вердикт:** Статус **SAFE**. У вас є значний запас пам'яті, що дозволяє за необх...",
-      "output": "{\"answer\": \"Навчання моделі yolo11n у режимі fp16 з batch_size=16 та img_size=640 успішно поміститься на відеокарті з 6 GB VRAM. Загальне споживання пам'яті становить 1.68 ГБ, що становить лише 28.0% від доступного обсягу, залишаючи 4.32 ГБ вільної пам'яті. Розподіл використання VRAM: активації — 0.988 ГБ, CUDA overhead — 0.65 ГБ, оптимізатор та градієнти — 0.039 ГБ, ваги моделі — 0.005 ГБ. Статус навчання визначено як SAFE, що дозволяє розглянути можливість збільшення розміру батчу для підвищен...",
+      "input": "Так, навчання моделі **yolo11n** з вказаними параметрами (batch_size=16, img_size=640, fp16) успішно поміститься у 6 GB відеопам'яті.\n\n**Деталі розрахунку:**\n*   **Загальне споживання VRAM:** ~1.68 GB.\n*   **Рівень завантаження GPU:** 28%.\n*   **Статус:** **SAFE** (безпечно).\n*   **Розподіл пам'яті:**\n    *   Активації: 0.988 GB\n    *   CUDA overhead: 0.65 GB\n    *   Ваги та оптимізатор: ~0.044 GB\n\nУ вас залишається близько 4.32 GB вільної пам'яті, тому ви можете навіть збільшити розмір батчу (b...",
+      "output": "{\"answer\": \"Так, навчання моделі yolo11n з параметрами batch_size=16, img_size=640 та fp16 повністю поміщається у 6 GB VRAM. Розрахункове загальне споживання пам'яті становить 1.68 GB, що займає лише 28% доступної відеопам'яті. Детальний розподіл пам'яті: активації займають 0.988 GB, CUDA overhead складає 0.65 GB, а ваги разом з оптимізатором та градієнтами споживають 0.044 GB. Після запуску тренування у вас залишиться близько 4.32 GB вільної VRAM, що дозволяє працювати у стабільному режимі (sta...",
       "tool_calls": [
         "estimate_gpu_vram"
       ],
-      "timestamp": "2026-11-25T19:25:10.048450+00:00",
-      "duration_ms": 6659,
-      "elapsed_ms": 10728
+      "timestamp": "2026-11-25T20:53:59.046768+00:00",
+      "duration_ms": 1300,
+      "elapsed_ms": 4887
     },
     {
       "test_id": "TC-002",
@@ -70,47 +70,47 @@
         "estimate_gpu_vram",
         "estimate_gpu_vram"
       ],
-      "timestamp": "2026-11-25T19:25:24.275951+00:00",
-      "duration_ms": 2202,
-      "elapsed_ms": 2226
+      "timestamp": "2026-11-25T20:54:12.390993+00:00",
+      "duration_ms": 1326,
+      "elapsed_ms": 1343
     },
     {
       "test_id": "TC-002",
       "step_number": 2,
       "node_name": "tools",
-      "input": "[{\"name\": \"estimate_gpu_vram\", \"args\": {\"model_name\": \"yolo11m\", \"gpu_vram_gb\": 6, \"img_size\": 640, \"batch_size\": 8, \"precision\": \"fp32\", \"mode\": \"train\"}}, {\"name\": \"estimate_gpu_vram\", \"args\": {\"img_size\": 640, \"gpu_vram_gb\": 6, \"batch_size\": 8, \"precision\": \"fp16\", \"model_name\": \"yolo11m\", \"mode\": \"train\"}}]",
+      "input": "[{\"name\": \"estimate_gpu_vram\", \"args\": {\"model_name\": \"yolo11m\", \"precision\": \"fp32\", \"mode\": \"train\", \"batch_size\": 8, \"gpu_vram_gb\": 6, \"img_size\": 640}}, {\"name\": \"estimate_gpu_vram\", \"args\": {\"mode\": \"train\", \"gpu_vram_gb\": 6, \"batch_size\": 8, \"precision\": \"fp16\", \"img_size\": 640, \"model_name\": \"yolo11m\"}}]",
       "output": "estimate_gpu_vram: {\"model_name\": \"yolo11m\", \"mode\": \"train\", \"precision\": \"fp32\", \"batch_size\": 8, \"img_size\": 640, \"gpu_vram_gb\": 6.0, \"breakdown_gb\": {\"weights_gb\": 0.075, \"optimizer_and_grad_gb\": 0.225, \"activations_gb\": 3.359, \"cuda_overhead_gb\": 0.65}, \"total_vram_gb\": 4.31, \"free_vram_gb\": 1.69, \"utilization_pct\": 71.8, \"fits_in_gpu\": true, \"status\": \"SAFE\"} | estimate_gpu_vram: {\"model_name\": \"yolo11m\", \"mode\": \"train\", \"precision\": \"fp16\", \"batch_size\": 8, \"img_size\": 640, \"gpu_vram_gb\"...",
       "tool_calls": [
         "estimate_gpu_vram",
         "estimate_gpu_vram"
       ],
-      "timestamp": "2026-11-25T19:25:24.278820+00:00",
+      "timestamp": "2026-11-25T20:54:12.393854+00:00",
       "duration_ms": 2,
-      "elapsed_ms": 2229
+      "elapsed_ms": 1346
     },
     {
       "test_id": "TC-002",
       "step_number": 3,
       "node_name": "agent",
       "input": "{\"model_name\": \"yolo11m\", \"mode\": \"train\", \"precision\": \"fp16\", \"batch_size\": 8, \"img_size\": 640, \"gpu_vram_gb\": 6.0, \"breakdown_gb\": {\"weights_gb\": 0.037, \"optimizer_and_grad_gb\": 0.3, \"activations_gb\": 1.848, \"cuda_overhead_gb\": 0.65}, \"total_vram_gb\": 2.83, \"free_vram_gb\": 3.17, \"utilization_pct\": 47.2, \"fits_in_gpu\": true, \"status\": \"SAFE\"}",
-      "output": "Ось порівняння споживання відеопам'яті (VRAM) для навчання моделі **YOLO11m** на GPU з 6 ГБ при `batch_size=8` та `img_size=640`:\n\n### 1. Режим FP32 (Full Precision)\n*   **Загальне споживання VRAM:** ~4.31 ГБ\n*   **Завантаження GPU:** 71.8%\n*   **Статус:** **SAFE** (Безпечно)\n*   **Деталі:** Більша частина пам'яті йде на активації (3.36 ГБ). Залишається близько 1.69 ГБ вільної пам'яті, що є прийнятним запасом.\n\n### 2. Режим FP16 (Half Precision / Mixed Precision)\n*   **Загальне споживання VRAM:*...",
+      "output": "Ось результати порівняння споживання VRAM для навчання моделі `yolo11m` при `batch_size=8` та `img_size=640` на GPU з 6 ГБ відеопам'яті:\n\n### Порівняльна таблиця\n| Параметр | Точність fp32 | Точність fp16 |\n| :--- | :--- | :--- |\n| **Загальне споживання VRAM** | ~4.31 ГБ | **~2.83 ГБ** |\n| **Завантаження GPU** | 71.8% | **47.2%** |\n| **Статус** | Безпечно | **Безпечно** |\n\n### Аналіз та рекомендації:\n1. **Безпека:** Обидва варіанти технічно \"безпечні\" і поміщаються у відеопам'ять вашої GPU (6 ГБ...",
       "tool_calls": [],
-      "timestamp": "2026-11-25T19:25:27.325367+00:00",
-      "duration_ms": 3046,
-      "elapsed_ms": 5276
+      "timestamp": "2026-11-25T20:54:15.129373+00:00",
+      "duration_ms": 2735,
+      "elapsed_ms": 4082
     },
     {
       "test_id": "TC-002",
       "step_number": 4,
       "node_name": "formatter",
-      "input": "Ось порівняння споживання відеопам'яті (VRAM) для навчання моделі **YOLO11m** на GPU з 6 ГБ при `batch_size=8` та `img_size=640`:\n\n### 1. Режим FP32 (Full Precision)\n*   **Загальне споживання VRAM:** ~4.31 ГБ\n*   **Завантаження GPU:** 71.8%\n*   **Статус:** **SAFE** (Безпечно)\n*   **Деталі:** Більша частина пам'яті йде на активації (3.36 ГБ). Залишається близько 1.69 ГБ вільної пам'яті, що є прийнятним запасом.\n\n### 2. Режим FP16 (Half Precision / Mixed Precision)\n*   **Загальне споживання VRAM:*...",
-      "output": "{\"answer\": \"Для навчання моделі yolo11m (batch_size=8, img_size=640) на GPU з 6 ГБ отримано такі результати порівняння точності: 1. Режим FP32: загальне споживання складає 4.31 ГБ (утилізація 71.8%), статус SAFE. Найбільшу частину займають активації — 3.359 ГБ, залишаючи 1.69 ГБ вільної пам'яті. 2. Режим FP16: загальне споживання складає 2.83 ГБ (утилізація 47.2%), статус SAFE. Тут активації займають лише 1.848 ГБ, що залишає 3.17 ГБ вільного простору. Обидва варіанти є безпечними для вашого обл...",
+      "input": "Ось результати порівняння споживання VRAM для навчання моделі `yolo11m` при `batch_size=8` та `img_size=640` на GPU з 6 ГБ відеопам'яті:\n\n### Порівняльна таблиця\n| Параметр | Точність fp32 | Точність fp16 |\n| :--- | :--- | :--- |\n| **Загальне споживання VRAM** | ~4.31 ГБ | **~2.83 ГБ** |\n| **Завантаження GPU** | 71.8% | **47.2%** |\n| **Статус** | Безпечно | **Безпечно** |\n\n### Аналіз та рекомендації:\n1. **Безпека:** Обидва варіанти технічно \"безпечні\" і поміщаються у відеопам'ять вашої GPU (6 ГБ...",
+      "output": "{\"answer\": \"Для навчання моделі yolo11m з batch_size=8 та img_size=640 на GPU з 6 ГБ пам'яті результати такі: у форматі fp32 споживання становить 4.31 ГБ (71.8% завантаження), тоді як у форматі fp16 споживання складає 2.83 ГБ (47.2% завантаження). Обидва варіанти є безпечними та вміщуються у відеопам'ять, проте використання fp16 дозволяє суттєво зменшити навантаження на GPU та залишити більше вільної пам'яті (3.17 ГБ проти 1.69 ГБ у fp32), тому fp16 є кращим вибором для стабільної роботи.\", \"con...",
       "tool_calls": [
         "estimate_gpu_vram"
       ],
-      "timestamp": "2026-11-25T19:25:34.676403+00:00",
-      "duration_ms": 7350,
-      "elapsed_ms": 12627
+      "timestamp": "2026-11-25T20:54:16.699921+00:00",
+      "duration_ms": 1569,
+      "elapsed_ms": 5652
     },
     {
       "test_id": "TC-003",
@@ -122,48 +122,48 @@
         "estimate_gpu_vram",
         "recommend_training_config"
       ],
-      "timestamp": "2026-11-25T19:25:48.828656+00:00",
-      "duration_ms": 2139,
-      "elapsed_ms": 2151
+      "timestamp": "2026-11-25T20:54:29.727083+00:00",
+      "duration_ms": 1014,
+      "elapsed_ms": 1026
     },
     {
       "test_id": "TC-003",
       "step_number": 2,
       "node_name": "tools",
-      "input": "[{\"name\": \"estimate_gpu_vram\", \"args\": {\"img_size\": 1024, \"mode\": \"train\", \"batch_size\": 8, \"gpu_vram_gb\": 6, \"precision\": \"fp16\", \"model_name\": \"yolo11l\"}}, {\"name\": \"recommend_training_config\", \"args\": {\"img_size\": 1024, \"model_name\": \"yolo11l\", \"prefer_bf16\": false, \"target_effective_batch_size\": 16, \"gpu_vram_gb\": 6}}]",
+      "input": "[{\"name\": \"estimate_gpu_vram\", \"args\": {\"precision\": \"fp16\", \"batch_size\": 8, \"model_name\": \"yolo11l\", \"mode\": \"train\", \"img_size\": 1024, \"gpu_vram_gb\": 6}}, {\"name\": \"recommend_training_config\", \"args\": {\"target_effective_batch_size\": 16, \"gpu_vram_gb\": 6, \"prefer_bf16\": false, \"model_name\": \"yolo11l\", \"img_size\": 1024}}]",
       "output": "estimate_gpu_vram: {\"model_name\": \"yolo11l\", \"mode\": \"train\", \"precision\": \"fp16\", \"batch_size\": 8, \"img_size\": 1024, \"gpu_vram_gb\": 6.0, \"breakdown_gb\": {\"weights_gb\": 0.047, \"optimizer_and_grad_gb\": 0.377, \"activations_gb\": 6.38, \"cuda_overhead_gb\": 0.65}, \"total_vram_gb\": 7.45, \"free_vram_gb\": -1.45, \"utilization_pct\": 124.2, \"fits_in_gpu\": false, \"status\": \"OOM_EXCEEDED\"} | recommend_training_config: {\"feasible_at_requested_resolution\": true, \"model_name\": \"yolo11l\", \"gpu_vram_gb\": 6.0, \"saf...",
       "tool_calls": [
         "estimate_gpu_vram",
         "recommend_training_config"
       ],
-      "timestamp": "2026-11-25T19:25:48.831491+00:00",
+      "timestamp": "2026-11-25T20:54:29.730279+00:00",
       "duration_ms": 2,
-      "elapsed_ms": 2154
+      "elapsed_ms": 1029
     },
     {
       "test_id": "TC-003",
       "step_number": 3,
       "node_name": "agent",
       "input": "{\"feasible_at_requested_resolution\": true, \"model_name\": \"yolo11l\", \"gpu_vram_gb\": 6.0, \"safe_vram_limit_gb\": 5.1, \"recommended_config\": {\"precision\": \"fp16\", \"img_size\": 1024, \"micro_batch_size\": 4, \"gradient_accumulation_steps\": 4, \"actual_effective_batch_size\": 16, \"num_workers\": 4, \"pin_memory\": true}, \"expected_vram_gb\": 4.26, \"expected_utilization_pct\": 71.1, \"notes\": \"Збережено >=15% запасу VRAM для стабільності та уникнення OOM-спайків під час валідації.\"}",
-      "output": "Ось результати аналізу та рекомендації щодо тренування **YOLO11l** на вашому обладнанні:\n\n### 1. Оцінка початкового запиту (batch_size=8, fp16)\nСпроба тренувати модель з батчем 8 при роздільній здатності 1024x1024 на RTX 2060 (6 GB) призведе до помилки **OOM (Out of Memory)**.\n*   **Необхідно VRAM:** ~7.45 ГБ\n*   **Доступно VRAM:** 6.00 ГБ\n*   **Завантаження:** 124.2% (перевищення на 1.45 ГБ)\n*   **Основна причина:** Великий об'єм активацій (6.38 ГБ) при високій роздільній здатності.\n\n### 2. Рек...",
+      "output": "Для виконання вашого запиту я провів оцінку споживання пам'яті та підібрав оптимальну конфігурацію навчання для моделі **YOLO11l** на відеокарті **RTX 2060 (6 GB VRAM)**.\n\n### 1. Аналіз спроби навчання з batch_size=8 (fp16)\nПри спробі навчання з `batch_size=8` на роздільній здатності `1024x1024` виникне помилка **OOM (Out of Memory)**:\n*   **Очікуване споживання VRAM:** ~7.45 GB.\n*   **Доступно:** 6.0 GB.\n*   **Вердикт:** Неможливо (перевищення ліміту на 1.45 GB). Основне споживання припадає на ...",
       "tool_calls": [],
-      "timestamp": "2026-11-25T19:26:06.675572+00:00",
-      "duration_ms": 17843,
-      "elapsed_ms": 19998
+      "timestamp": "2026-11-25T20:54:32.222820+00:00",
+      "duration_ms": 2492,
+      "elapsed_ms": 3522
     },
     {
       "test_id": "TC-003",
       "step_number": 4,
       "node_name": "formatter",
-      "input": "Ось результати аналізу та рекомендації щодо тренування **YOLO11l** на вашому обладнанні:\n\n### 1. Оцінка початкового запиту (batch_size=8, fp16)\nСпроба тренувати модель з батчем 8 при роздільній здатності 1024x1024 на RTX 2060 (6 GB) призведе до помилки **OOM (Out of Memory)**.\n*   **Необхідно VRAM:** ~7.45 ГБ\n*   **Доступно VRAM:** 6.00 ГБ\n*   **Завантаження:** 124.2% (перевищення на 1.45 ГБ)\n*   **Основна причина:** Великий об'єм активацій (6.38 ГБ) при високій роздільній здатності.\n\n### 2. Рек...",
-      "output": "{\"answer\": \"Аналіз можливості тренування YOLO11l (1024x1024) на RTX 2060 (6 GB VRAM) показав наступні результати:\\n\\n1. Оцінка початкового запиту (batch_size=8, fp16):\\nСпроба запуску з такими параметрами призведе до помилки Out of Memory (OOM). Загальна потреба у відеопам'яті становить 7.45 ГБ, що складає 124.2% від доступних 6.0 ГБ. Основний об'єм пам'яті займають активації (6.38 ГБ), тоді як ваги та градієнти потребують лише 0.047 ГБ та 0.377 ГБ відповідно.\\n\\n2. Рекомендована безпечна конфіг...",
+      "input": "Для виконання вашого запиту я провів оцінку споживання пам'яті та підібрав оптимальну конфігурацію навчання для моделі **YOLO11l** на відеокарті **RTX 2060 (6 GB VRAM)**.\n\n### 1. Аналіз спроби навчання з batch_size=8 (fp16)\nПри спробі навчання з `batch_size=8` на роздільній здатності `1024x1024` виникне помилка **OOM (Out of Memory)**:\n*   **Очікуване споживання VRAM:** ~7.45 GB.\n*   **Доступно:** 6.0 GB.\n*   **Вердикт:** Неможливо (перевищення ліміту на 1.45 GB). Основне споживання припадає на ...",
+      "output": "{\"answer\": \"Для навчання моделі YOLO11l на роздільній здатності 1024x1024 на відеокарті RTX 2060 (6 GB VRAM) з цільовим ефективним батчем 16 було проведено аналіз. Оцінка для batch_size=8 у fp16 показала, що навчання неможливе: споживання VRAM складе 7.45 GB, що на 1.45 GB перевищує ліміт (статус OOM_EXCEEDED). Основне навантаження створюють активації (6.38 GB). Для безпечного тренування з досягненням ефективного батчу 16 рекомендую використовувати таку конфігурацію: micro_batch_size=4 при gradi...",
       "tool_calls": [
         "estimate_gpu_vram",
         "recommend_training_config"
       ],
-      "timestamp": "2026-11-25T19:26:12.750815+00:00",
-      "duration_ms": 6074,
-      "elapsed_ms": 26073
+      "timestamp": "2026-11-25T20:54:33.903119+00:00",
+      "duration_ms": 1679,
+      "elapsed_ms": 5202
     },
     {
       "test_id": "TC-004",
@@ -174,75 +174,99 @@
       "tool_calls": [
         "audit_annotation_batch"
       ],
-      "timestamp": "2026-11-25T19:26:27.475978+00:00",
-      "duration_ms": 2713,
-      "elapsed_ms": 2724
+      "timestamp": "2026-11-25T20:54:47.037095+00:00",
+      "duration_ms": 1122,
+      "elapsed_ms": 1133
     },
     {
       "test_id": "TC-004",
       "step_number": 2,
       "node_name": "tools",
-      "input": "[{\"name\": \"audit_annotation_batch\", \"args\": {\"missing_label_rate\": 0.06, \"reviewed_images\": 450, \"strict_mode\": true, \"total_images\": 4000, \"batch_id\": \"DRONE-07\", \"honeypot_accuracy\": 0.84, \"mean_iou\": 0.72}}]",
+      "input": "[{\"name\": \"audit_annotation_batch\", \"args\": {\"honeypot_accuracy\": 0.84, \"strict_mode\": true, \"reviewed_images\": 450, \"total_images\": 4000, \"missing_label_rate\": 0.06, \"batch_id\": \"DRONE-07\", \"mean_iou\": 0.72}}]",
       "output": "audit_annotation_batch: {\"batch_id\": \"DRONE-07\", \"mode\": \"strict\", \"verdict\": \"REJECTED\", \"sample_coverage_pct\": 11.25, \"thresholds\": {\"min_iou\": 0.85, \"min_honeypot\": 0.92, \"max_missing\": 0.02, \"min_sample_pct\": 10.0}, \"failed_gates\": [\"Низький mean_iou: 0.72 < 0.85\", \"Провалено honeypot-тести: 0.84 < 0.92\", \"Зависока частка пропусків: 6.00% > 2.00%\"], \"estimated_rework_images\": 4000, \"rework_pct\": 100.0}",
       "tool_calls": [
         "audit_annotation_batch"
       ],
-      "timestamp": "2026-11-25T19:26:27.478163+00:00",
+      "timestamp": "2026-11-25T20:54:47.039162+00:00",
       "duration_ms": 1,
-      "elapsed_ms": 2726
+      "elapsed_ms": 1135
     },
     {
       "test_id": "TC-004",
       "step_number": 3,
       "node_name": "agent",
       "input": "{\"batch_id\": \"DRONE-07\", \"mode\": \"strict\", \"verdict\": \"REJECTED\", \"sample_coverage_pct\": 11.25, \"thresholds\": {\"min_iou\": 0.85, \"min_honeypot\": 0.92, \"max_missing\": 0.02, \"min_sample_pct\": 10.0}, \"failed_gates\": [\"Низький mean_iou: 0.72 < 0.85\", \"Провалено honeypot-тести: 0.84 < 0.92\", \"Зависока частка пропусків: 6.00% > 2.00%\"], \"estimated_rework_images\": 4000, \"rework_pct\": 100.0}",
-      "output": "tool_calls: ['estimate_labeling_budget', 'estimate_labeling_budget']",
+      "output": "tool_calls: ['estimate_labeling_budget']",
       "tool_calls": [
-        "estimate_labeling_budget",
         "estimate_labeling_budget"
       ],
-      "timestamp": "2026-11-25T19:26:28.990548+00:00",
-      "duration_ms": 1512,
-      "elapsed_ms": 4239
+      "timestamp": "2026-11-25T20:54:48.083239+00:00",
+      "duration_ms": 1043,
+      "elapsed_ms": 2179
     },
     {
       "test_id": "TC-004",
       "step_number": 4,
       "node_name": "tools",
-      "input": "[{\"name\": \"estimate_labeling_budget\", \"args\": {\"hourly_rate_usd\": 11, \"num_images\": 4000, \"annotation_type\": \"bbox\", \"qa_review_pct\": 15, \"avg_objects_per_image\": 8, \"prelabeling_assist\": false}}, {\"name\": \"estimate_labeling_budget\", \"args\": {\"prelabeling_assist\": true, \"hourly_rate_usd\": 11, \"avg_objects_per_image\": 8, \"num_images\": 4000, \"annotation_type\": \"bbox\", \"qa_review_pct\": 15}}]",
-      "output": "estimate_labeling_budget: {\"num_images\": 4000, \"annotation_type\": \"bbox\", \"avg_objects_per_image\": 8.0, \"prelabeling_assist\": false, \"qa_review_pct\": 15.0, \"hourly_rate_usd\": 11.0, \"labeling_hours\": 65.56, \"qa_hours\": 3.44, \"total_hours\": 69.0, \"estimated_cost_usd\": 758.97, \"cost_per_image_usd\": 0.1897, \"annotator_days_6h\": 11.5} | estimate_labeling_budget: {\"num_images\": 4000, \"annotation_type\": \"bbox\", \"avg_objects_per_image\": 8.0, \"prelabeling_assist\": true, \"qa_review_pct\": 15.0, \"hourly_rat...",
+      "input": "[{\"name\": \"estimate_labeling_budget\", \"args\": {\"annotation_type\": \"bbox\", \"avg_objects_per_image\": 8, \"prelabeling_assist\": false, \"num_images\": 4000, \"hourly_rate_usd\": 11, \"qa_review_pct\": 15}}]",
+      "output": "estimate_labeling_budget: {\"num_images\": 4000, \"annotation_type\": \"bbox\", \"avg_objects_per_image\": 8.0, \"prelabeling_assist\": false, \"qa_review_pct\": 15.0, \"hourly_rate_usd\": 11.0, \"labeling_hours\": 65.56, \"qa_hours\": 3.44, \"total_hours\": 69.0, \"estimated_cost_usd\": 758.97, \"cost_per_image_usd\": 0.1897, \"annotator_days_6h\": 11.5}",
       "tool_calls": [
-        "estimate_labeling_budget",
         "estimate_labeling_budget"
       ],
-      "timestamp": "2026-11-25T19:26:28.993215+00:00",
-      "duration_ms": 2,
-      "elapsed_ms": 4241
+      "timestamp": "2026-11-25T20:54:48.085219+00:00",
+      "duration_ms": 1,
+      "elapsed_ms": 2181
     },
     {
       "test_id": "TC-004",
       "step_number": 5,
       "node_name": "agent",
-      "input": "{\"num_images\": 4000, \"annotation_type\": \"bbox\", \"avg_objects_per_image\": 8.0, \"prelabeling_assist\": true, \"qa_review_pct\": 15.0, \"hourly_rate_usd\": 11.0, \"labeling_hours\": 26.22, \"qa_hours\": 3.44, \"total_hours\": 29.66, \"estimated_cost_usd\": 326.3, \"cost_per_image_usd\": 0.0816, \"annotator_days_6h\": 4.94}",
-      "output": "Ось результати аудиту та розрахунки бюджету для партії **DRONE-07**.\n\n### 1. Результат QA-аудиту (Strict Mode)\nПартія **DRONE-07** була **ВІДХИЛЕНА (REJECTED)**. Вона не відповідає вимогам якості для критичних CV-пайплайнів за всіма ключовими метриками.\n\n*   **Вердикт:** Повна перерозмітка (100% rework).\n*   **Причини відхилення:**\n    *   **Середній IoU (0.72):** значно нижче порогу 0.85. Це свідчить про низьку геометричну точність боксів.\n    *   **Honeypot Accuracy (0.84):** не досягнуто міні...",
-      "tool_calls": [],
-      "timestamp": "2026-11-25T19:26:32.440799+00:00",
-      "duration_ms": 3447,
-      "elapsed_ms": 7689
+      "input": "{\"num_images\": 4000, \"annotation_type\": \"bbox\", \"avg_objects_per_image\": 8.0, \"prelabeling_assist\": false, \"qa_review_pct\": 15.0, \"hourly_rate_usd\": 11.0, \"labeling_hours\": 65.56, \"qa_hours\": 3.44, \"total_hours\": 69.0, \"estimated_cost_usd\": 758.97, \"cost_per_image_usd\": 0.1897, \"annotator_days_6h\": 11.5}",
+      "output": "tool_calls: ['estimate_labeling_budget']",
+      "tool_calls": [
+        "estimate_labeling_budget"
+      ],
+      "timestamp": "2026-11-25T20:54:49.481829+00:00",
+      "duration_ms": 1396,
+      "elapsed_ms": 3578
     },
     {
       "test_id": "TC-004",
       "step_number": 6,
+      "node_name": "tools",
+      "input": "[{\"name\": \"estimate_labeling_budget\", \"args\": {\"prelabeling_assist\": true, \"num_images\": 4000, \"qa_review_pct\": 15, \"hourly_rate_usd\": 11, \"annotation_type\": \"bbox\", \"avg_objects_per_image\": 8}}]",
+      "output": "estimate_labeling_budget: {\"num_images\": 4000, \"annotation_type\": \"bbox\", \"avg_objects_per_image\": 8.0, \"prelabeling_assist\": true, \"qa_review_pct\": 15.0, \"hourly_rate_usd\": 11.0, \"labeling_hours\": 26.22, \"qa_hours\": 3.44, \"total_hours\": 29.66, \"estimated_cost_usd\": 326.3, \"cost_per_image_usd\": 0.0816, \"annotator_days_6h\": 4.94}",
+      "tool_calls": [
+        "estimate_labeling_budget"
+      ],
+      "timestamp": "2026-11-25T20:54:49.483958+00:00",
+      "duration_ms": 1,
+      "elapsed_ms": 3580
+    },
+    {
+      "test_id": "TC-004",
+      "step_number": 7,
+      "node_name": "agent",
+      "input": "{\"num_images\": 4000, \"annotation_type\": \"bbox\", \"avg_objects_per_image\": 8.0, \"prelabeling_assist\": true, \"qa_review_pct\": 15.0, \"hourly_rate_usd\": 11.0, \"labeling_hours\": 26.22, \"qa_hours\": 3.44, \"total_hours\": 29.66, \"estimated_cost_usd\": 326.3, \"cost_per_image_usd\": 0.0816, \"annotator_days_6h\": 4.94}",
+      "output": "Результати QA-аудиту партії **DRONE-07** свідчать про невідповідність встановленим стандартам якості, тому партію було **відхилено (REJECTED)**.\n\n### Звіт QA-аудиту (Strict Mode)\nПартія не пройшла за всіма основними метриками для критичних пайплайнів:\n*   **Mean IoU**: 0.72 (поріг 0.85) — *недостатньо точно*.\n*   **Honeypot Accuracy**: 0.84 (поріг 0.92) — *низька надійність анотатора*.\n*   **Missing Label Rate**: 6% (поріг 2%) — *надмірна кількість пропущених об'єктів*.\n*   **Рішення**: Повна пе...",
+      "tool_calls": [],
+      "timestamp": "2026-11-25T20:54:51.886445+00:00",
+      "duration_ms": 2402,
+      "elapsed_ms": 5982
+    },
+    {
+      "test_id": "TC-004",
+      "step_number": 8,
       "node_name": "formatter",
-      "input": "Ось результати аудиту та розрахунки бюджету для партії **DRONE-07**.\n\n### 1. Результат QA-аудиту (Strict Mode)\nПартія **DRONE-07** була **ВІДХИЛЕНА (REJECTED)**. Вона не відповідає вимогам якості для критичних CV-пайплайнів за всіма ключовими метриками.\n\n*   **Вердикт:** Повна перерозмітка (100% rework).\n*   **Причини відхилення:**\n    *   **Середній IoU (0.72):** значно нижче порогу 0.85. Це свідчить про низьку геометричну точність боксів.\n    *   **Honeypot Accuracy (0.84):** не досягнуто міні...",
-      "output": "{\"answer\": \"Результати строгого QA-аудиту партії DRONE-07 (4000 зображень): статус — ВІДХИЛЕНО (REJECTED). Покриття перевіркою склало 11.25% (450 кадрів), зафіксовано 100% потребу у перерозмітці через критичне відхилення від нормативів: 1. Середній IoU склав 0.72 (мінімум 0.85). 2. Точність honeypot — 0.84 (мінімум 0.92). 3. Частка пропущених міток — 6.00% (максимум 2.00%). Розрахунок бюджету повної перерозмітки (8 об'єктів/кадр, $11/год, 15% QA): Варіант без pre-labeling: загальна вартість $758...",
+      "input": "Результати QA-аудиту партії **DRONE-07** свідчать про невідповідність встановленим стандартам якості, тому партію було **відхилено (REJECTED)**.\n\n### Звіт QA-аудиту (Strict Mode)\nПартія не пройшла за всіма основними метриками для критичних пайплайнів:\n*   **Mean IoU**: 0.72 (поріг 0.85) — *недостатньо точно*.\n*   **Honeypot Accuracy**: 0.84 (поріг 0.92) — *низька надійність анотатора*.\n*   **Missing Label Rate**: 6% (поріг 2%) — *надмірна кількість пропущених об'єктів*.\n*   **Рішення**: Повна пе...",
+      "output": "{\"answer\": \"Результати QA-аудиту партії DRONE-07 свідчать про невідповідність стандартам якості, тому партію було ВІДХИЛЕНО (REJECTED). Основні причини провалу: низький mean_iou (0.72 < 0.85), невідповідність honeypot-тестам (0.84 < 0.92) та зависока частка пропусків (6.00% > 2.00%). Потрібна повна перерозмітка 4000 зображень. Розрахунок бюджету для перерозмітки: 1) Без pre-labeling: загальна вартість $758.97, загальний час 69 годин, вартість за кадр $0.1897, потрібно 11.5 робочих днів по 6 годи...",
       "tool_calls": [
         "audit_annotation_batch",
         "estimate_labeling_budget"
       ],
-      "timestamp": "2026-11-25T19:26:46.432464+00:00",
-      "duration_ms": 13991,
-      "elapsed_ms": 21680
+      "timestamp": "2026-11-25T20:55:09.927399+00:00",
+      "duration_ms": 18040,
+      "elapsed_ms": 24023
     },
     {
       "test_id": "TC-005",
@@ -255,50 +279,50 @@
         "recommend_training_config",
         "estimate_labeling_budget"
       ],
-      "timestamp": "2026-11-25T19:27:03.085170+00:00",
-      "duration_ms": 4641,
-      "elapsed_ms": 4652
+      "timestamp": "2026-11-25T20:55:23.340125+00:00",
+      "duration_ms": 1401,
+      "elapsed_ms": 1411
     },
     {
       "test_id": "TC-005",
       "step_number": 2,
       "node_name": "tools",
-      "input": "[{\"name\": \"estimate_gpu_vram\", \"args\": {\"mode\": \"train\", \"gpu_vram_gb\": 8, \"model_name\": \"efficientnet_b4\", \"precision\": \"fp16\", \"img_size\": 640, \"batch_size\": 16}}, {\"name\": \"recommend_training_config\", \"args\": {\"model_name\": \"efficientnet_b4\", \"prefer_bf16\": false, \"target_effective_batch_size\": 32, \"img_size\": 640, \"gpu_vram_gb\": 8}}, {\"name\": \"estimate_labeling_budget\", \"args\": {\"annotation_type\": \"classification\", \"qa_review_pct\": 10, \"num_images\": 3000, \"hourly_rate_usd\": 9}}]",
-      "output": "estimate_gpu_vram: {\"model_name\": \"efficientnet_b4\", \"mode\": \"train\", \"precision\": \"fp16\", \"batch_size\": 16, \"img_size\": 640, \"gpu_vram_gb\": 8.0, \"breakdown_gb\": {\"weights_gb\": 0.036, \"optimizer_and_grad_gb\": 0.288, \"activations_gb\": 4.211, \"cuda_overhead_gb\": 0.65}, \"total_vram_gb\": 5.18, \"free_vram_gb\": 2.82, \"utilization_pct\": 64.8, \"fits_in_gpu\": true, \"status\": \"SAFE\"} | recommend_training_config: {\"feasible_at_requested_resolution\": true, \"model_name\": \"efficientnet_b4\", \"gpu_vram_gb\": 8.0...",
+      "input": "[{\"name\": \"estimate_gpu_vram\", \"args\": {\"model_name\": \"efficientnet_b4\", \"mode\": \"train\", \"precision\": \"int4\", \"img_size\": 640, \"gpu_vram_gb\": 8, \"batch_size\": 16}}, {\"name\": \"recommend_training_config\", \"args\": {\"target_effective_batch_size\": 32, \"img_size\": 640, \"gpu_vram_gb\": 8, \"model_name\": \"efficientnet_b4\", \"prefer_bf16\": false}}, {\"name\": \"estimate_labeling_budget\", \"args\": {\"avg_objects_per_image\": 1, \"hourly_rate_usd\": 9, \"qa_review_pct\": 10, \"num_images\": 3000, \"annotation_type\": \"cla...",
+      "output": "estimate_gpu_vram: Error: ToolInvocationError(\"Error invoking tool 'estimate_gpu_vram' with kwargs {'model_name': 'efficientnet_b4', 'mode': 'train', 'precision': 'int4', 'img_size': 640, 'gpu_vram_gb': 8, 'batch_size': 16} with error:\\n \\n Please fix the error and try again.\")\n Please fix your mistakes. | recommend_training_config: {\"feasible_at_requested_resolution\": true, \"model_name\": \"efficientnet_b4\", \"gpu_vram_gb\": 8.0, \"safe_vram_limit_gb\": 6.8, \"recommended_config\": {\"precision\": \"fp16\"...",
       "tool_calls": [
         "estimate_gpu_vram",
         "recommend_training_config",
         "estimate_labeling_budget"
       ],
-      "timestamp": "2026-11-25T19:27:03.088478+00:00",
+      "timestamp": "2026-11-25T20:55:23.343786+00:00",
       "duration_ms": 2,
-      "elapsed_ms": 4655
+      "elapsed_ms": 1415
     },
     {
       "test_id": "TC-005",
       "step_number": 3,
       "node_name": "agent",
-      "input": "{\"num_images\": 3000, \"annotation_type\": \"classification\", \"avg_objects_per_image\": 5.0, \"prelabeling_assist\": false, \"qa_review_pct\": 10.0, \"hourly_rate_usd\": 9.0, \"labeling_hours\": 3.33, \"qa_hours\": 0.12, \"total_hours\": 3.45, \"estimated_cost_usd\": 31.05, \"cost_per_image_usd\": 0.0103, \"annotator_days_6h\": 0.58}",
-      "output": "Ось детальний технічний розбір вашого запиту:\n\n### 1. Перевірка VRAM для EfficientNet-B4\n**Важливе зауваження:** Точність `int4` використовується виключно для інференсу (запуску готової моделі). Для навчання мінімально допустимим стандартом є `fp16` (Mixed Precision), тому розрахунок проведено саме для цього режиму.\n\n*   **Модель:** EfficientNet-B4\n*   **Конфігурація:** Batch Size 16, Image Size 640, Precision FP16.\n*   **Результат:** **Пройдено (SAFE)**.\n*   **Використання VRAM:** ~5.18 ГБ з 8 ...",
+      "input": "{\"num_images\": 3000, \"annotation_type\": \"classification\", \"avg_objects_per_image\": 1.0, \"prelabeling_assist\": false, \"qa_review_pct\": 10.0, \"hourly_rate_usd\": 9.0, \"labeling_hours\": 3.33, \"qa_hours\": 0.12, \"total_hours\": 3.45, \"estimated_cost_usd\": 31.05, \"cost_per_image_usd\": 0.0103, \"annotator_days_6h\": 0.58}",
+      "output": "Для аналізу вашого запиту я провів розрахунки щодо GPU-ресурсів та бюджету розмітки. Ось результати:\n\n### 1. Навчання EfficientNet-B4 на 8 GB VRAM\n*   **Статус запиту (int4, batch_size=16):** Навчання моделей у форматі `int4` безпосередньо через стандартні фреймворки (PyTorch/TensorFlow) для тренування є технічно обмеженим або недоступним для архітектур типу EfficientNet.\n*   **Безпечна конфігурація (target_effective_batch_size = 32):**\n    Для успішного навчання на GPU з 8 GB VRAM рекомендую ви...",
       "tool_calls": [],
-      "timestamp": "2026-11-25T19:27:07.162544+00:00",
-      "duration_ms": 4073,
-      "elapsed_ms": 8729
+      "timestamp": "2026-11-25T20:55:25.572895+00:00",
+      "duration_ms": 2228,
+      "elapsed_ms": 3644
     },
     {
       "test_id": "TC-005",
       "step_number": 4,
       "node_name": "formatter",
-      "input": "Ось детальний технічний розбір вашого запиту:\n\n### 1. Перевірка VRAM для EfficientNet-B4\n**Важливе зауваження:** Точність `int4` використовується виключно для інференсу (запуску готової моделі). Для навчання мінімально допустимим стандартом є `fp16` (Mixed Precision), тому розрахунок проведено саме для цього режиму.\n\n*   **Модель:** EfficientNet-B4\n*   **Конфігурація:** Batch Size 16, Image Size 640, Precision FP16.\n*   **Результат:** **Пройдено (SAFE)**.\n*   **Використання VRAM:** ~5.18 ГБ з 8 ...",
-      "output": "{\"answer\": \"Ось детальний технічний розбір вашого запиту:\\n\\n### 1. Перевірка VRAM для EfficientNet-B4\\n**Важливе зауваження:** Точність `int4` використовується виключно для інференсу (запуску готової моделі). Для навчання мінімально допустимим стандартом є `fp16` (Mixed Precision), тому розрахунок проведено саме для цього режиму.\\n\\n*   **Модель:** EfficientNet-B4\\n*   **Конфігурація:** Batch Size 16, Image Size 640, Precision FP16.\\n*   **Результат:** **Пройдено (SAFE)**.\\n*   **Використання V...",
+      "input": "Для аналізу вашого запиту я провів розрахунки щодо GPU-ресурсів та бюджету розмітки. Ось результати:\n\n### 1. Навчання EfficientNet-B4 на 8 GB VRAM\n*   **Статус запиту (int4, batch_size=16):** Навчання моделей у форматі `int4` безпосередньо через стандартні фреймворки (PyTorch/TensorFlow) для тренування є технічно обмеженим або недоступним для архітектур типу EfficientNet.\n*   **Безпечна конфігурація (target_effective_batch_size = 32):**\n    Для успішного навчання на GPU з 8 GB VRAM рекомендую ви...",
+      "output": "{\"answer\": \"Спроба навчання EfficientNet-B4 в режимі int4 з batch_size=16 виявилася неможливою через технічні обмеження інструментарію. Для досягнення ефективного batch_size=32 на 8 GB VRAM рекомендую наступну конфігурацію: precision 'fp16', micro_batch_size 16, gradient_accumulation_steps 2. Це забезпечить очікуване споживання VRAM на рівні 5.18 GB (що становить 64.8% від доступної пам'яті), залишаючи запас для стабільності. Бюджет на розмітку 3000 зображень класифікації при ставці $9/год та 10...",
       "tool_calls": [
         "estimate_gpu_vram",
         "recommend_training_config",
         "estimate_labeling_budget"
       ],
-      "timestamp": "2026-11-25T19:28:44.381629+00:00",
-      "duration_ms": 97218,
-      "elapsed_ms": 105948
+      "timestamp": "2026-11-25T20:55:27.147306+00:00",
+      "duration_ms": 1573,
+      "elapsed_ms": 5219
     }
   ]
 }

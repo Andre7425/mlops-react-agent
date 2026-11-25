@@ -192,7 +192,7 @@ def run_test_suite() -> None:
                 "query": tc["query"],
                 "expected": tc["expected"],
                 "expected_tools": tc["expected_tools"],
-                "actual": actual_text[:1000],
+                "actual": actual_text,
                 "confidence": confidence,
                 "sources": sources,
                 "status": status,
